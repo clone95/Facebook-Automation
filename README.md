@@ -1,3 +1,3 @@
-# Reddit-messages-scraper
+# Facebook Messages Scraper
 
-A tool for automating Reddit notification and answers.
+A tool for automating Facebook notification.
