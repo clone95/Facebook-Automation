@@ -1,50 +1,61 @@
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 import time
 
-
-def _get_news_list(self):
-    return self.driver.find_elements_by_css_selector(".friendBrowserNameTitle > a")
+# disabling notifications browser-level popUP
 
 chrome_options = webdriver.ChromeOptions()
-prefs = {"profile.default_content_setting_values.notifications" : 2}
-chrome_options.add_experimental_option("prefs",prefs)
+prefs = {"profile.default_content_setting_values.notifications": 2}
+chrome_options.add_experimental_option("prefs", prefs)
 browser = webdriver.Chrome(chrome_options=chrome_options)
 
 
-# opening browser
+def main():
 
-browser.get('https://facebook.com')
+    print(menu)
+    your_email = input("Insert e-mail")
+    your_pwd = input("Insert password")
 
-# finding login input areas
+    time.sleep(1)
+    browser.get('https://facebook.com')
 
-mailElement = browser.find_element_by_id('email')
-pwdElement = browser.find_element_by_id('pass')
+    # finding login input areas
 
-# filling login form
+    mail_element= browser.find_element_by_id('email')
+    pwd_element = browser.find_element_by_id('pass')
 
-mailElement.send_keys("giac290595@gmail.com")
-pwdElement.send_keys("Jellyash")
+    # filling login form
 
-# login
+    mail_element.send_keys(str(your_email))
+    pwd_element.send_keys(str(your_pwd))
 
-submitElement = browser.find_element_by_id('u_0_2')
-submitElement.click()
+    # login
 
-# open notifications
+    submit_element = browser.find_element_by_id('u_0_2')
+    submit_element.click()
+    want_notif = input(notifications)
 
-# browser.forward()
+    if want_notif == "yes":
+        get_notifications()
+    else:
+        exit(-1)
 
-notificationsEl = browser.find_element_by_id('fbNotificationsJewel')
-notificationsEl.click()
 
-time.sleep(2)
+def get_notifications():
 
-seeMoreEl = notificationsEl.find_element_by_class_name("seeMore")
-seeMoreEl.click()
+    notifications_element = browser.find_element_by_id('fbNotificationsJewel')
+    notifications_element.click()
+    # time to load "see more" button
+    time.sleep(2)
 
-list = browser.find_element_by_class_name('_44_u')
-print(list)
+    see_more_element = notifications_element.find_element_by_class_name("seeMore")
+    see_more_element.click()
 
+
+menu = "Welcome to Facebook utility\n. Please insert email and password\n"
+
+notifications = "Do you want to open notification?\n" \
+                "yes / no\n"
+
+main()
 
 
